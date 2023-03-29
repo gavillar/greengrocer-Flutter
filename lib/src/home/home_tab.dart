@@ -3,10 +3,18 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 
-class HomeTab extends StatelessWidget {
-   HomeTab({super.key});
+import 'components_home/category_title.dart';
 
-  
+class HomeTab extends StatelessWidget {
+  HomeTab({super.key});
+
+  List<String> category = [
+    'Frutas',
+    'Grãos',
+    'Verduras',
+    'Temperos',
+    'Cereais',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -70,10 +78,7 @@ class HomeTab extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-               vertical: 10
-               ),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: TextFormField(
               decoration: InputDecoration(
                 filled: true,
@@ -99,14 +104,24 @@ class HomeTab extends StatelessWidget {
               ),
             ),
           ),
-        ],
-      ),
+       
 
       // category
 
-//git
+      ListView.separated(
+          itemBuilder: (_, index) {
+            return CategoryTitle(
+              category: category[index],
+              isSelected: false,
+            );
+          },
+          separatorBuilder: (_, index) => const SizedBox(width: 10),
+          itemCount: category.length,
+          ),
 
       // grid
+       ],
+      ),
     );
   }
 }
